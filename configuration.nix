@@ -98,6 +98,7 @@
     discord-canary
     vscode
     btop
+    chromium
   ];
   
   system = {
