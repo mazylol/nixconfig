@@ -30,6 +30,13 @@
     };
   };
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   networking = {
     hostName = "nixvm";
     networkmanager.enable = true;
@@ -75,9 +82,20 @@
 
   nixpkgs = {
     config.allowUnfree = true;
+    overlays = [
+      (import "${fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz"}/overlay.nix")
+    ];
   };
 
   environment.systemPackages = with pkgs; [
+    (fenix.complete.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
+    rust-analyzer-nightly
     neovim
     yarn
     nodejs
