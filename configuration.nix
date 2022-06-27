@@ -82,37 +82,19 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [
-      (import "${fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz"}/overlay.nix")
-    ];
   };
 
   environment.systemPackages = with pkgs; [
-    (fenix.complete.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-    ])
-    rust-analyzer-nightly
     neovim
-    yarn
-    nodejs
     neofetch
     pfetch
     vim
     wget
-    curlFull
     firefox
     alacritty
     git
     gh
     github-desktop
-    gnumake
-    libgnurl
-    gcc
-    clang
     discord-canary
     vscode
     btop
